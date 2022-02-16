@@ -10,9 +10,11 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
+        "laravel/jetstream": "^2.6",
+        "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.5",
         "league/flysystem": "1.1.4",
-        "livewire/livewire": "^2.4",
+        "livewire/livewire": "^2.5",
         "symfony/http-kernel": "5.4"
     },
     "require-dev": {
@@ -20,6 +22,7 @@
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
+        "nascent-africa/jetstrap": "^2.5",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
     },
