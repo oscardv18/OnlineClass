@@ -91,7 +91,7 @@
             </div>
 
             {{-- If the user is on the sign up page --}}
-        @elseif (!auth()->check() && in_array(request()->route()->getName(),['sign-up'],))
+        @elseif (!auth()->check() && in_array(request()->route()->getName(),['register'],))
             <div>
                 @include('layouts.navbars.guest.sign-up')
                 {{ $slot }}

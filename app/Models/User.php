@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Rol;
+use App\Models\Post;
+use App\Models\Rating;
+use App\Models\Address;
+use Laravel\Jetstream\HasTeams;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Jetstream\HasTeams;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -58,4 +62,21 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    // ########## Relationships ########## //
+    public function rols() {
+        return $this->belongsTo(Rol::class);
+    }
+
+    public function address() {
+        return $this->hasOne(Address::class);
+    }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
+
+    public function ratings() {
+        return $this->hasMany(Rating::class);
+    }
 }
