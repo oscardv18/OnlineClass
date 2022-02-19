@@ -2,10 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-
 use App\Models\User;
+
+use Illuminate\Database\Seeder;
+use Database\Seeders\PostSeeder;
+use Database\Seeders\RolsSeeder;
+use Database\Seeders\UserSeeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,10 +19,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@softui.com',
-            'password' => Hash::make('secret')
+        $this->call([
+            RolsSeeder::class,
+            UserSeeder::class,
+            TeamSeeder::class,
+            PostSeeder::class,
         ]);
     }
 }

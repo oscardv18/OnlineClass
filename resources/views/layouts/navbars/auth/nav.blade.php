@@ -13,13 +13,6 @@
                     {{ str_replace('-', ' ', Route::currentRouteName()) }}</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
-                {{-- <div class="nav-item d-flex align-self-end">
-                    <a href="https://www.creative-tim.com/product/soft-ui-dashboard-laravel" target="_blank"
-                        class="btn btn-primary active mb-0 text-white" role="button" aria-pressed="true">
-                        Download
-                    </a>
-                </div> --}}
-
                 <ul class="navbar-nav justify-content-end">
                     <li class="nav-item d-flex align-items-center">
                         <form action="{{ route('logout') }}" method="post">
@@ -27,7 +20,7 @@
                             <a href="{{ route("logout") }}" class="nav-link text-body font-weight-bold px-0" onclick="event.preventDefault();
                             this.closest('form').submit();">
                                 <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none">Sign Out</span>
+                                <span class="d-sm-inline d-none">Cerrar Sesión</span>
                             </a>
                         </form>
                     </li>
@@ -73,7 +66,7 @@
                                     <div class="d-flex py-1">
                                         <div class="my-auto">
                                             <img src="../assets/img/small-logos/logo-spotify.svg"
-                                                class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                            class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">
@@ -98,10 +91,10 @@
                                                 <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none"
                                                     fill-rule="evenodd">
                                                     <g id="Rounded-Icons"
-                                                        transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF"
-                                                        fill-rule="nonzero">
-                                                        <g id="Icons-with-opacity"
-                                                            transform="translate(1716.000000, 291.000000)">
+                                                    transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF"
+                                                    fill-rule="nonzero">
+                                                    <g id="Icons-with-opacity"
+                                                    transform="translate(1716.000000, 291.000000)">
                                                             <g id="credit-card"
                                                                 transform="translate(453.000000, 454.000000)">
                                                                 <path class="color-background"
