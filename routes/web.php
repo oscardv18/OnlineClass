@@ -1,23 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Rtl;
 
-use App\Http\Livewire\Auth\ForgotPassword;
-use App\Http\Livewire\Auth\ResetPassword;
-use App\Http\Livewire\Auth\SignUp;
-use App\Http\Livewire\Auth\Login;
-use App\Http\Livewire\Dashboard;
+use Illuminate\Http\Request;
+use App\Http\Livewire\Tables;
 use App\Http\Livewire\Billing;
 use App\Http\Livewire\Profile;
-use App\Http\Livewire\Tables;
+use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Auth\Login;
+use App\Http\Livewire\Auth\SignUp;
 use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
-use App\Http\Livewire\Rtl;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+
+use App\Http\Livewire\Auth\ResetPassword;
+use App\Http\Livewire\Auth\ForgotPassword;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
-
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,7 @@ Route::get('/portfolio-details', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    Route::resource('/dashboard/posts', PostController::class);
     Route::get('/billing', Billing::class)->name('billing');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/tables', Tables::class)->name('tables');

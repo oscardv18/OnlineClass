@@ -183,6 +183,20 @@
                                     @error('email') <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rol_id" id="student" value="3">
+                                        <label class="custom-control-label" for="student">Estudiante</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rol_id" id="teacher" value="2">
+                                        <label class="custom-control-label" for="teacher">Profesor</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rol_id" id="institute" value="1">
+                                        <label class="custom-control-label" for="institute">Institución</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
                                     {{-- <label for="password">{{ __('Contraseña') }}</label> --}}
                                     <div class="@error('password') border border-danger rounded-3 @enderror">
                                         <input id="password" name="password" type="password" class="form-control"
