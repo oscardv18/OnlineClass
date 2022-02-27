@@ -10,6 +10,10 @@ class File extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name_file', 'extension', 'file_path', 'post_id',
+    ];
+
     public function posts() {
         return $this->belongsTo(Post::class);
     }

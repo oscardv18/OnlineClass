@@ -15,6 +15,8 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string('name_file', 200);
+            $table->string('extension', 50);
             $table->string('file_path', 255);
             # relationships one to many with post table
             $table->unsignedBigInteger('post_id')->nullable();

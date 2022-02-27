@@ -10,7 +10,7 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Publicaciones</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        <a href="#">Visualizar</a>
+                                        <a href="{{ route('posts.index') }}">Visualizar</a>
                                         {{-- <span class="text-success text-sm font-weight-bolder">+55%</span> --}}
                                     </h5>
                                 </div>

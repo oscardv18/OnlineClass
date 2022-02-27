@@ -19,6 +19,8 @@ use App\Http\Livewire\Auth\ForgotPassword;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
+use App\Http\Livewire\Post\FilesManagment\FileQuestion;
+use App\Http\Livewire\Posts\AdminPost;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +74,7 @@ Route::get('/portfolio-details', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::resource('/dashboard/posts', PostController::class);
+    Route::get('dashboard/admin-posts', AdminPost::class)->name('admin-posts');
     Route::get('/billing', Billing::class)->name('billing');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/tables', Tables::class)->name('tables');

@@ -65,18 +65,6 @@
                 </div>
             </div>
             @include('components.plugins.fixed-plugin')
-
-            @include('layouts.navbars.auth.sidebar')
-            @include('layouts.navbars.auth.nav')
-            @include('components.plugins.fixed-plugin')
-            {{ $slot }}
-            <main>
-                <div class="container-fluid">
-                    <div class="row">
-                        @include('layouts.footers.auth.footer')
-                    </div>
-                </div>
-            </main> --}} --}}
         @else
             @include('layouts.navbars.auth.sidebar')
             @include('layouts.navbars.auth.nav')

@@ -14,6 +14,15 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title', 'description', 'content', 'content', 'user_id', 'post_type_id', 'team_id',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'updated_at' => 'datetime:d-m-Y'
+    ];
+
     public function users() {
         return $this->belongsTo(User::class);
     }
