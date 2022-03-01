@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use App\Http\Livewire\Rtl;
 
 use Illuminate\Http\Request;
@@ -72,9 +73,13 @@ Route::get('/portfolio-details', function () {
 // });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    # Principal Route
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    # Post Routes
     Route::resource('/dashboard/posts', PostController::class);
     Route::get('dashboard/admin-posts', AdminPost::class)->name('admin-posts');
+
+    # Template Routes
     Route::get('/billing', Billing::class)->name('billing');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/tables', Tables::class)->name('tables');

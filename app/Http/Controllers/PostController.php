@@ -67,17 +67,18 @@ class PostController extends Controller
         $post_id = DB::table('posts')->orderBy('id', 'desc')->first();
 
         # Creación de los registro de los archivos en la tabla files
+
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
-                $path = Storage::putFile('files', $file);
-                $url = Storage::url($path);
                 $fileName = $file->getClientOriginalName();
                 $fileExtension = $file->getClientOriginalExtension();
+                $path = Storage::putFileAs('posts', $file, $fileName);
+                // $url = Storage::url($path);
 
                 File::create([
                     'name_file' => $fileName,
                     'extension' => $fileExtension,
-                    'file_path' => $url,
+                    'file_path' => $path,
                     'post_id' => $post_id->id,
                 ]);
             }

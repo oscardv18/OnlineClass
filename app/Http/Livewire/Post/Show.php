@@ -7,14 +7,15 @@ use Illuminate\Support\Facades\Storage;
 
 class Show extends Component
 {
-    public $files, $path;
+    public $files;
 
     public function mout($fil) {
         $this->files = $fil;
     }
 
-    public function downloadFile() {
-        return Storage::disk('public')->download($this->path);
+    public function downloadFile($file_name) {
+        $theFile = storage_path("app/posts/$file_name");
+        return response()->download($theFile);
     }
 
     public function render()

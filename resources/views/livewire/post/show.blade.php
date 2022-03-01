@@ -15,23 +15,21 @@
             <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">Recursos del Post</h6>
             <ul class="list-group">
                 @foreach ($files as $file)
-                <li
-                    class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                    <div class="d-flex align-items-center">
-                        <button
-                            class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i
-                                class="fas fa-arrow-up"></i></button>
-                        <div class="d-flex flex-column">
-                            <h6 class="mb-1 text-dark text-sm">{{ $file->name_file }}</h6>
-                            <small class="" wire:model="path">{{ $file->file_path }}</small>
-                            <span class="text-xs">{{ $file->created_at }}</span>
+                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                        <div class="d-flex align-items-center">
+                            <button
+                                class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i
+                                    class="fas fa-arrow-up"></i></button>
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-1 text-dark text-sm">{{ $file->name_file }}</h6>
+                                <span class="text-xs">{{ $file->created_at }}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div
-                        class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                        <a href="#" wire:click="downloadFile">Descargar</a>
-                    </div>
-                </li>
+                        <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
+                            <button type="button" class="btn bg-outline-success"
+                                wire:click="downloadFile('{{ $file->name_file }}')">Descargar</button>
+                        </div>
+                    </li>
                 @endforeach
             </ul>
         </div>
