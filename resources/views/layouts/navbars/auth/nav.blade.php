@@ -17,12 +17,75 @@
                     <li class="nav-item d-flex align-items-center">
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <a href="{{ route("logout") }}" class="nav-link text-body font-weight-bold px-0" onclick="event.preventDefault();
+                            <a href="{{ route('logout') }}" class="nav-link text-body font-weight-bold px-0" onclick="event.preventDefault();
                             this.closest('form').submit();">
                                 <i class="fa fa-user me-sm-1"></i>
                                 <span class="d-sm-inline d-none">Cerrar Sesión</span>
                             </a>
                         </form>
+                    </li>
+                    <li class="nav-item px-2 d-flex align-items-center">
+                        <!-- Teams Dropdown -->
+                        @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+
+                            <x-jet-dropdown id="teamManagementDropdown">
+                                <x-slot name="trigger">
+                                    <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44"
+                                        version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <title>document</title>
+                                        <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none"
+                                            fill-rule="evenodd">
+                                            <g id="Rounded-Icons" transform="translate(-1870.000000, -591.000000)"
+                                                fill="#FFFFFF" fill-rule="nonzero">
+                                                <g id="Icons-with-opacity"
+                                                    transform="translate(1716.000000, 291.000000)">
+                                                    <g id="document" transform="translate(154.000000, 300.000000)">
+                                                        <path class="color-background"
+                                                            d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z"
+                                                            id="Path" opacity="0.603585379"></path>
+                                                        <path class="color-background"
+                                                            d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z"
+                                                            id="Shape"></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    {{ __('Teams') }}
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <!-- Team Management -->
+                                    <h6 class="dropdown-header">
+                                        {{ __('Manage Team') }}
+                                    </h6>
+
+                                    <!-- Team Settings -->
+                                    <x-jet-dropdown-link
+                                        href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
+                                        {{ __('Team Settings') }}
+                                    </x-jet-dropdown-link>
+
+                                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                                        <x-jet-dropdown-link href="{{ route('teams.create') }}">
+                                            {{ __('Create New Team') }}
+                                        </x-jet-dropdown-link>
+                                    @endcan
+
+                                    <hr class="dropdown-divider">
+
+                                    <!-- Team Switcher -->
+                                    <h6 class="dropdown-header">
+                                        {{ __('Switch Teams') }}
+                                    </h6>
+
+                                    @foreach (Auth::user()->allTeams() as $team)
+                                        <x-jet-switchable-team :team="$team" />
+                                    @endforeach
+                                </x-slot>
+                            </x-jet-dropdown>
+                        @endif
                     </li>
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -39,10 +102,12 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-bell cursor-pointer"></i>
                         </a>
-                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
+                            aria-labelledby="dropdownMenuButton">
                             <li class="mb-2">
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
@@ -66,7 +131,7 @@
                                     <div class="d-flex py-1">
                                         <div class="my-auto">
                                             <img src="../assets/img/small-logos/logo-spotify.svg"
-                                            class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                                class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">
@@ -91,10 +156,10 @@
                                                 <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none"
                                                     fill-rule="evenodd">
                                                     <g id="Rounded-Icons"
-                                                    transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF"
-                                                    fill-rule="nonzero">
-                                                    <g id="Icons-with-opacity"
-                                                    transform="translate(1716.000000, 291.000000)">
+                                                        transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF"
+                                                        fill-rule="nonzero">
+                                                        <g id="Icons-with-opacity"
+                                                            transform="translate(1716.000000, 291.000000)">
                                                             <g id="credit-card"
                                                                 transform="translate(453.000000, 454.000000)">
                                                                 <path class="color-background"
@@ -127,4 +192,3 @@
             </div>
         </div>
     </nav>
-

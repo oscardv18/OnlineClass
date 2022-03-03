@@ -6,6 +6,7 @@ use App\Models\Post;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPost extends Component
 {
@@ -22,7 +23,7 @@ class AdminPost extends Component
 
     public function render()
     {
-        $posts = Post::where('title', 'like', '%'. $this->search .'%')->paginate(10);
+        $posts = Post::where('title', 'like', '%'. $this->search .'%')->where('user_id', '=', Auth::user()->id)->paginate(10);
         return view('livewire.posts.admin-post', compact('posts'));
     }
 }
