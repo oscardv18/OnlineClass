@@ -11,6 +11,11 @@ class Rating extends Model
 {
     use HasFactory;
 
+    protected $table = 'ratings';
+    protected $fillable = [
+        'max_rating', 'rating', 'creator', 'post_id', 'user_id', 'evaluation_id',
+    ];
+
     public function posts() {
         return $this->belongsTo(Post::class);
     }

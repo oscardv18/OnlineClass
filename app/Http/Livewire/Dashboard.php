@@ -11,7 +11,10 @@ class Dashboard extends Component
 {
     public function render()
     {
-        $posts = Post::orderBy('updated_at', 'desc')->where('user_id', '=', Auth::user()->id)->take(6)->get();
+        $posts = Post::orderBy('updated_at', 'desc')
+            ->where('team_id', '=', Auth::user()->currentTeam->id)
+            ->take(6)
+            ->get();
         $posttype = PostType::all();
 
         return view('livewire.dashboard', compact('posts', 'posttype'));

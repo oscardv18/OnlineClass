@@ -23,7 +23,9 @@ class AdminPost extends Component
 
     public function render()
     {
-        $posts = Post::where('title', 'like', '%'. $this->search .'%')->where('user_id', '=', Auth::user()->id)->paginate(10);
+        $posts = Post::where('title', 'like', '%' . $this->search . '%')
+            ->where('team_id', '=', Auth::user()->currentTeam->id)
+            ->paginate(10);
         return view('livewire.posts.admin-post', compact('posts'));
     }
 }

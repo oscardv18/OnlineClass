@@ -5,10 +5,10 @@
                 <div class="col-md-6">
                     <h6 class="mb-0">Publicaciones Recientes</h6>
                 </div>
-                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                {{-- <div class="col-md-6 d-flex justify-content-end align-items-center">
                     <i class="far fa-calendar-alt me-2"></i>
                     <small>23 - 30 March 2020</small>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="card-body pt-4 p-3">

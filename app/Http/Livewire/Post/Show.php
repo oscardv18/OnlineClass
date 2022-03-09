@@ -2,15 +2,20 @@
 
 namespace App\Http\Livewire\Post;
 
+use App\Models\Rating;
+use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
 
 class Show extends Component
 {
-    public $files;
+    public $files, $evals;
 
-    public function mout($fil) {
+    protected $listeners = ['render'];
+
+    public function mout($fil, $eval) {
         $this->files = $fil;
+        $this->evals - $eval;
     }
 
     public function downloadFile($file_name) {
@@ -20,6 +25,8 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.post.show');
+        $users = User::all();
+        $ratings = Rating::all();
+        return view('livewire.post.show', compact('users', 'ratings'));
     }
 }

@@ -94,7 +94,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
+                                <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="{{ route('profile.show') }}" role="tab"
                                     aria-controls="dashboard" aria-selected="false">
                                     <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 40"
                                         version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +122,7 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <span class="ms-1">{{ __('Projects') }}</span>
+                                    <span class="ms-1">{{ __('Modificar') }}</span>
                                 </a>
                             </li>
                         </ul>
@@ -163,7 +163,7 @@
                 @endif
 
                 <form wire:submit.prevent="save" action="#" method="POST" role="form text-left">
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="user-name" class="form-control-label">{{ __('Full Name') }}</label>
@@ -188,7 +188,7 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

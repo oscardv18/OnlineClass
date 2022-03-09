@@ -42,11 +42,11 @@
 
             {{-- OPCIONES DEL PERFIL DE USUARIO --}}
             <li class="nav-item mt-2">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Usuario</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'user-profile' ? 'active' : '' }}"
-                    href="{{ route('user-profile') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'profile.show' ? 'active' : '' }}"
+                    href="{{ route('profile.show') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
@@ -72,10 +72,10 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">User Profile</span>
+                    <span class="nav-link-text ms-1">{{ __("Perfil de Usuario") }}</span>
                 </a>
             </li>
-            <li class="nav-item pb-2">
+            {{-- <li class="nav-item pb-2">
                 <a class="nav-link {{ Route::currentRouteName() == 'user-management' ? 'active' : '' }}"
                     href="{{ route('user-management') }}">
                     <div
@@ -86,7 +86,7 @@
                     </div>
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
-            </li>
+            </li> --}}
 
             {{-- POSTS SECTION --}}
             <li class="nav-item mt-2">
@@ -215,7 +215,7 @@
             </li>
 
             {{-- COMPONENTS  --}}
-            <li class="nav-item mt-2">
+            {{-- <li class="nav-item mt-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Example pages</h6>
             </li>
             <li class="nav-item">
@@ -395,7 +395,7 @@
                     </div>
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
-            </li>
+            </li> --}}
             {{-- <li class="nav-link mb-0">
                 <a href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-laravel"
                     class="btn btn-primary btn-md active px-5 text-white" target="_blank" role="button"

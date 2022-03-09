@@ -16,14 +16,14 @@
             </div>
         </div>
         <div class="row mx-3">
-            @if(session()->has('status'))
-            <div class="alert alert-success alert-dismissible fade show text-white" role="alert">
-                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-                <span class="alert-text"><strong>Listo!</strong> {{ session()->get('status') }}</span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            @if (session()->has('status'))
+                <div class="alert alert-success alert-dismissible fade show text-white" role="alert">
+                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                    <span class="alert-text"><strong>Listo!</strong> {{ session()->get('status') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             @endif
         </div>
         <div class="row">
@@ -67,87 +67,101 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Actualizado
                                         </th>
+                                        {{-- @if (Auth::user()->id === $post->user_id) --}}
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Acción
                                         </th>
+                                        {{-- @endif --}}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($posts as $post)
-                                    <tr>
-                                        <td class="ps-4">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $post->id }}</p>
-                                        </td>
-                                        {{-- <td>
+                                        <tr>
+                                            <td class="ps-4">
+                                                <p class="text-xs font-weight-bold mb-0">{{ $post->id }}</p>
+                                            </td>
+                                            {{-- <td>
                                             <div>
                                                 <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $post->user_id }}</p>
                                             </div>
                                         </td> --}}
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $post->user_id }}</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $post->title }}</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $post->created_at }}</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $post->updated_at
-                                                }}</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="mx-3"
-                                                data-bs-toggle="tooltip" data-bs-original-title="Editar post">
-                                                <i class="fas fa-user-edit text-secondary"></i>
-                                            </a>
-                                            <i class="cursor-pointer fas fa-trash text-secondary" data-bs-toggle="modal"
-                                                data-bs-target="#modal-notification-{{ $post->id }}"></i>
-                                            <div class="modal fade" id="modal-notification-{{ $post->id }}"
-                                                tabindex="-1" role="dialog" aria-labelledby="modal-notification"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-danger modal-dialog-centered modal-"
-                                                    role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h6 class="modal-title" id="modal-title-notification">
-                                                                ¿Eliminar pub?</h6>
-                                                            <button type="button" class="btn-close text-black"
-                                                                data-bs-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">x</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="py-3 text-center">
-                                                                <i class="ni ni-bell-55 ni-3x"></i>
-                                                                <h4 class="text-gradient text-danger mt-4">¿Estás Seguro
-                                                                    que deseas eliminar el Post?</h4>
-                                                                <p>
-                                                                    ID: {{ $post->id }}
-                                                                </p>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">{{ $post->user_id }}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">{{ $post->title }}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">{{ $post->created_at }}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <span
+                                                    class="text-secondary text-xs font-weight-bold">{{ $post->updated_at }}</span>
+                                            </td>
+                                            @if (Auth::user()->id === $post->user_id)
+                                                <td class="text-center">
+                                                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                                                        class="mx-3" data-bs-toggle="tooltip"
+                                                        data-bs-original-title="Editar post">
+                                                        <i class="fas fa-user-edit text-secondary"></i>
+                                                    </a>
+                                                    <i class="cursor-pointer fas fa-trash text-secondary"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modal-notification-{{ $post->id }}"></i>
+                                                    <div class="modal fade"
+                                                        id="modal-notification-{{ $post->id }}" tabindex="-1"
+                                                        role="dialog" aria-labelledby="modal-notification"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-danger modal-dialog-centered modal-"
+                                                            role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h6 class="modal-title"
+                                                                        id="modal-title-notification">
+                                                                        ¿Eliminar pub?</h6>
+                                                                    <button type="button" class="btn-close text-black"
+                                                                        data-bs-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">x</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="py-3 text-center">
+                                                                        <i class="ni ni-bell-55 ni-3x"></i>
+                                                                        <h4 class="text-gradient text-danger mt-4">
+                                                                            ¿Estás
+                                                                            Seguro
+                                                                            que deseas eliminar el Post?</h4>
+                                                                        <p>
+                                                                            ID: {{ $post->id }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form
+                                                                        action="{{ route('posts.destroy', ['post' => $post->id]) }}"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-danger">Si,
+                                                                            Eliminar</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-secondary text-white ml-auto"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <form
-                                                                action="{{ route('posts.destroy', ['post' => $post->id]) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger">Si,
-                                                                    Eliminar</button>
-                                                                <button type="button"
-                                                                    class="btn btn-secondary text-white ml-auto"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                            </form>
-                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-
-                                        </td>
-                                    </tr>
+                                                </td>
+                                            @else
+                                                <td class="text-center">
+                                                    <span
+                                                        class="text-secondary text-xs font-weight-bold">{{ __('Ninguna') }}</span>
+                                                </td>
+                                            @endif
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

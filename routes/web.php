@@ -14,7 +14,7 @@ use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\TelegramBotController;
 use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\Auth\ForgotPassword;
 
@@ -79,14 +79,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('/dashboard/posts', PostController::class);
     Route::get('dashboard/admin-posts', AdminPost::class)->name('admin-posts');
 
+    # Telegram Routes
+    // Route::post('/dashboard/updated-activity', [TelegramBotController::class, 'updatedActivity'])->name('updated-activity');
+
     # Template Routes
-    Route::get('/billing', Billing::class)->name('billing');
-    Route::get('/profile', Profile::class)->name('profile');
-    Route::get('/tables', Tables::class)->name('tables');
-    Route::get('/static-sign-in', StaticSignIn::class)->name('sign-in');
-    Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
-    Route::get('/rtl', Rtl::class)->name('rtl');
-    Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
-    Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
+    // Route::get('/billing', Billing::class)->name('billing');
+    // Route::get('/profile', Profile::class)->name('profile');
+    // Route::get('/tables', Tables::class)->name('tables');
+    // Route::get('/static-sign-in', StaticSignIn::class)->name('sign-in');
+    // Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
+    // Route::get('/rtl', Rtl::class)->name('rtl');
+    // Route::get('/user-profile', UserProfile::class)->name('user-profile');
+    // Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
 });
 

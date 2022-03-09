@@ -4,14 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\Post;
+use App\Models\User;
 use App\Models\PostType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
+use App\Models\Evaluation;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class, 'post');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +30,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->where('user_id', '=', Auth::user()->id)->get();
-        return view('components.posts.index', compact('posts'));
+        $posts = Post::orderBy('id', 'desc')
+            ->where('team_id', '=', Auth::user()->currentTeam->id)
+            ->get();
+
+        $users = User::all();
+        return view('components.posts.index', compact('posts', 'users'));
     }
 
     /**
@@ -47,11 +62,6 @@ class PostController extends Controller
         $content = $request->input('content');
         $post_type_id = $request->input('post_type_id');
 
-        # Uso de el Query Buildder de laravel para obtener el id del team actual, pero este debe coincidir con el numero de id del usuario actual del team
-        $team_id = DB::table('teams')->select('id')
-            ->where('id', '=', Auth::user()->id)
-            ->value('id');
-
         # Creacion del post dentro de la DB usando Eloquent para este trabajo
         Post::create([
             'title' => $title,
@@ -59,7 +69,7 @@ class PostController extends Controller
             'content' => $content,
             'user_id' => Auth::user()->id,
             'post_type_id' => $post_type_id,
-            'team_id' => $team_id,
+            'team_id' => Auth::user()->currentTeam->id,
         ]);
 
         # Obtencion del post id para asignarlo a la tabla files para saber a que post pertenecen cada archivo
@@ -72,7 +82,6 @@ class PostController extends Controller
                 $fileName = $file->getClientOriginalName();
                 $fileExtension = $file->getClientOriginalExtension();
                 $path = Storage::putFileAs('posts', $file, $fileName);
-                // $url = Storage::url($path);
 
                 File::create([
                     'name_file' => $fileName,
@@ -93,13 +102,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::where('id', '=', $id)->get();
+        $this->authorize('view', $post);
+
+        $files = File::where('post_id', '=', $post->id)->get();
+        $evaluations = Evaluation::where('post_id', '=', $post->id)->get();
+        $postId = $post->id;
+        $post = Post::where('id', '=', $post->id)->get();
         $post_type = PostType::all();
         $wtf = [];
-
-        $files = File::where('post_id', '=', $id)->get();
 
         foreach ($post_type as $type) {
             foreach ($post as $p) {
@@ -111,8 +123,7 @@ class PostController extends Controller
                 }
             }
         }
-
-        return view('components.posts.show', compact('post', 'wtf', 'files'));
+        return view('components.posts.show', compact('post', 'wtf', 'files', 'evaluations', 'postId'));
     }
 
     /**
@@ -121,10 +132,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $postToEdit = DB::table('posts')->where('id', '=', $id)->get();
-        $post_files = DB::table('files')->where('post_id', '=', $id)->get();
+        $postToEdit = DB::table('posts')->where('id', '=', $post->id)->get();
+        $post_files = DB::table('files')->where('post_id', '=', $post->id)->get();
 
         return view('components.posts.edit', compact('postToEdit', 'post_files'));
     }

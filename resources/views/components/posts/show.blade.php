@@ -6,8 +6,7 @@
                     @foreach ($post as $pub)
                         <div class="card card-blog card-plain">
                             <div class="card-body px-0 pt-4">
-                                <p
-                                    class="text-gradient text-primary text-gradient font-weight-bold text-sm text-uppercase">
+                                <p class="text-gradient text-primary text-gradient font-weight-bold text-sm text-uppercase">
                                     {{ $wtf['name'] }}
                                 </p>
                                 <a href="javascript:;">
@@ -18,12 +17,12 @@
                                 <p>
                                     {{ $pub->content }}
                                 </p>
-                                <button type="button" class="btn bg-gradient-primary mt-3">Editar Publicación</button>
                             </div>
+                            @livewire('posts.file-upload', ['post' => $pub])
                         </div>
-                    @endforeach
+                        @endforeach
                 </div>
-                @livewire('post.show', ['files' => $files]);
+                @livewire('post.show', ['files' => $files, 'evals' => $evaluations])
             </div>
         </div>
     </main>

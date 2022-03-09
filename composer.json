@@ -9,14 +9,15 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
-        "irazasyed/telegram-bot-sdk": "^3.4.1",
         "laravel/framework": "^8.75",
         "laravel/jetstream": "^2.6",
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.5",
         "league/flysystem": "1.1.4",
         "livewire/livewire": "^2.5",
-        "symfony/http-kernel": "5.4"
+        "nnjeim/world": "^1.1",
+        "symfony/http-kernel": "5.4",
+        "westacks/telebot": "^1.14"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
