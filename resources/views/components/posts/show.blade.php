@@ -6,8 +6,13 @@
                     @foreach ($post as $pub)
                         <div class="card card-blog card-plain">
                             <div class="card-body px-0 pt-4">
-                                <p class="text-gradient text-primary text-gradient font-weight-bold text-sm text-uppercase">
+                                <p
+                                    class="text-gradient text-primary text-gradient font-weight-bold text-lg text-uppercase">
                                     {{ $wtf['name'] }}
+                                    @if ($wtf['name'] === 'Evaluación')
+                                        <span class="text-gradient text-info text-sm">- Culminación:
+                                            {{ $pub->duration }}</span>
+                                    @endif
                                 </p>
                                 <a href="javascript:;">
                                     <h4>
@@ -18,11 +23,13 @@
                                     {{ $pub->content }}
                                 </p>
                             </div>
-                            @livewire('posts.file-upload', ['post' => $pub])
+                            @if ($wtf['name'] === 'Evaluación')
+                                @livewire('posts.file-upload', ['post' => $pub])
+                            @endif
                         </div>
-                        @endforeach
+                    @endforeach
                 </div>
-                @livewire('post.show', ['files' => $files, 'evals' => $evaluations])
+                @livewire('post.show', ['fil' => $files, 'eval' => $evaluations, 'postType' => $wtf['name']])
             </div>
         </div>
     </main>

@@ -61,6 +61,8 @@ class PostController extends Controller
         $description = $request->input('description');
         $content = $request->input('content');
         $post_type_id = $request->input('post_type_id');
+        $eval_duration = date('Y-m-d H:i:s');
+        $eval_duration = $request->input('duration');
 
         # Creacion del post dentro de la DB usando Eloquent para este trabajo
         Post::create([
@@ -70,6 +72,7 @@ class PostController extends Controller
             'user_id' => Auth::user()->id,
             'post_type_id' => $post_type_id,
             'team_id' => Auth::user()->currentTeam->id,
+            'duration' => $eval_duration,
         ]);
 
         # Obtencion del post id para asignarlo a la tabla files para saber a que post pertenecen cada archivo

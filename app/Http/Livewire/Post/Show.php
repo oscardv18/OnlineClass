@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Storage;
 
 class Show extends Component
 {
-    public $files, $evals;
+    public $files, $evals, $type;
 
     protected $listeners = ['render'];
 
-    public function mout($fil, $eval) {
+    public function mount($fil, $eval, $postType) {
         $this->files = $fil;
-        $this->evals - $eval;
+        $this->evals = $eval;
+        $this->type = $postType;
     }
 
     public function downloadFile($file_name) {

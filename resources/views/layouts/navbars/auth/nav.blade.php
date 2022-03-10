@@ -7,23 +7,23 @@
                     <li class="breadcrumb-item text-md"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
                     </li>
                     <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">
-                        {{ str_replace('-', ' ', Route::currentRouteName()) }}</li>
+                        @if (str_contains(Route::currentRouteName(), '.'))
+                            {{ str_replace('.', ' ', Route::currentRouteName()) }}
+                        @else
+                            {{ str_replace('-', ' ', Route::currentRouteName()) }}
+                        @endif
                 </ol>
                 <h6 class="font-weight-bolder mb-0 text-capitalize">
-                    {{ str_replace('-', ' ', Route::currentRouteName()) }}</h6>
+                    @if (str_contains(Route::currentRouteName(), '.'))
+                        {{ str_replace('.', ' ', Route::currentRouteName()) }}
+                    @else
+                        {{ str_replace('-', ' ', Route::currentRouteName()) }}
+                    @endif
+                </h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
                 <ul class="navbar-nav justify-content-end">
-                    <li class="nav-item d-flex align-items-center">
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <a href="{{ route('logout') }}" class="nav-link text-body font-weight-bold px-0" onclick="event.preventDefault();
-                            this.closest('form').submit();">
-                                <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none">Cerrar Sesión</span>
-                            </a>
-                        </form>
-                    </li>
+
                     <li class="nav-item px-2 d-flex align-items-center">
                         <!-- Teams Dropdown -->
                         @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
@@ -87,6 +87,16 @@
                             </x-jet-dropdown>
                         @endif
                     </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <a href="{{ route('logout') }}" class="nav-link text-body font-weight-bold px-0" onclick="event.preventDefault();
+                            this.closest('form').submit();">
+                                <i class="fa fa-user me-sm-1"></i>
+                                <span class="d-sm-inline d-none">Cerrar Sesión</span>
+                            </a>
+                        </form>
+                    </li>
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                             <div class="sidenav-toggler-inner">
@@ -101,7 +111,8 @@
                             <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
                         </a>
                     </li>
-                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
+
+                    {{-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
                         <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-bell cursor-pointer"></i>
@@ -187,7 +198,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

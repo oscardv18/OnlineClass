@@ -22,6 +22,6 @@ class PostSeeder extends Seeder
             'name_type' => 'Evaluación',
         ]);
 
-        Post::factory(60)->create();
+        // Post::factory(60)->create();
     }
 }

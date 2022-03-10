@@ -1,96 +1,5 @@
 <main class="main-content">
     <div class="container-fluid py-4">
-        {{-- Indicators --}}
-        <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Publicaciones</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                        <a href="{{ route('posts.index') }}">Visualizar</a>
-                                        {{-- <span class="text-success text-sm font-weight-bolder">+55%</span> --}}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Teams</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                        <a href="#">Ingresar</a>
-                                        {{-- <span class="text-success text-sm font-weight-bolder">+3%</span> --}}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Profesores</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                        <a href="#">Ver</a>
-                                        {{-- <span class="text-danger text-sm font-weight-bolder">-2%</span> --}}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Evaluaciones</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                        <a href="#">Revisar</a>
-                                        {{-- <span class="text-success text-sm font-weight-bolder">+5%</span> --}}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row mt-4">
             <div class="col-lg-7 mb-lg-0 mb-4">
                 <div class="card">
@@ -110,7 +19,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-                                <div class="bg-gradient-info border-radius-lg h-100">
+                                <div class="bg-gradient-primary border-radius-lg h-100">
                                     <img src="../assets/img/shapes/waves-white.svg"
                                         class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                                     <div
@@ -337,7 +246,7 @@
             </div>
         </div> --}}
         <div class="row my-4">
-            <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+            <div class=" mb-md-0 mb-4">
                 <div class="card">
                     <div class="card-header pb-0">
                         <div class="row">
@@ -348,7 +257,7 @@
                                     <span class="font-weight-bold ms-1">Solo aparecerán las 6</span> más recientes
                                 </p>
                             </div>
-                            <div class="col-lg-6 col-5 my-auto text-end">
+                            {{-- <div class="col-lg-6 col-5 my-auto text-end">
                                 <div class="dropdown float-lg-end pe-4">
                                     <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
                                         aria-expanded="false">
@@ -363,7 +272,7 @@
                                                 here</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">

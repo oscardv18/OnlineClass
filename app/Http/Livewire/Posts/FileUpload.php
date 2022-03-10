@@ -22,8 +22,13 @@ class FileUpload extends Component
         $this->identificator = rand();
     }
 
-    public function saveFile($post_id)
+    public function uploadFile()
     {
+        $this->validate([
+            'files.*' => 'max:6049',
+            'files' => 'required',
+        ]);
+
         foreach ($this->files as $file) {
             $fileName = $file->getClientOriginalName();
             $path = Storage::putFileAs('posts', $file, $fileName);
@@ -31,21 +36,13 @@ class FileUpload extends Component
             Evaluation::create([
                 'path' => $path,
                 'name' => $fileName,
-                'post_id' => $post_id,
+                'post_id' => $this->post_id,
                 'user_id' => Auth::user()->id,
             ]);
         }
-    }
 
-    public function uploadFile()
-    {
-        $this->validate([
-            'files.*' => 'max:6049',
-        ]);
-
-        $this->saveFile($this->post_id);
-        $this->reset(['files', 'identificator', 'post_id']);
-        $this->emitTo('show', 'render');
+        session()->flash('success', 'Evaluación entregada');
+        return redirect()->route('posts.show', ['post' => $this->post_id]);
     }
 
     public function render()

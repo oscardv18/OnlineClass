@@ -16,13 +16,20 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'content', 'content', 'user_id', 'post_type_id', 'team_id',
+        'title', 'description', 'content', 'content', 'user_id', 'post_type_id', 'team_id', 'duration',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime:d-m-Y',
-        'updated_at' => 'datetime:d-m-Y'
-    ];
+    public function getCreatedAtAttribute($value) {
+        return \Carbon\Carbon::parse($value)->format('d/m/Y H:i');
+    }
+
+    public function getUpdatedAtAttribute($value) {
+        return \Carbon\Carbon::parse($value)->format('d/m/Y H:i');
+    }
+
+    public function getDurationAttribute($value) {
+        return \Carbon\Carbon::parse($value)->format('d/m/Y H:i');
+    }
 
     public function users() {
         return $this->belongsTo(User::class);

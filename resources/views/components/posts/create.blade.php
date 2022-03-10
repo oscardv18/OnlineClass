@@ -37,13 +37,13 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" x-data="{ view: false }">
                                     @if (Auth::user()->rol_id < 3)
                                         <label>{{ __('Seleccione el Tipo de Publicación') }}</label>
                                     @endif
                                     <div class="form-check mb-3">
                                         @if (Auth::user()->rol_id < 3)
-                                            <input class="form-check-input" type="radio" name="post_type_id"
+                                            <input @click="view=false" class="form-check-input" type="radio" name="post_type_id"
                                                 id="information" value="1">
                                         @else
                                             <input class="form-check-input" type="radio" name="post_type_id"
@@ -54,10 +54,16 @@
                                     </div>
                                     @if (Auth::user()->rol_id < 3)
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="post_type_id"
+                                            <input @click="view=true" class="form-check-input" type="radio" name="post_type_id"
                                                 id="evaluation" value="2">
                                             <label class="custom-control-label"
                                                 for="evaluation">{{ __('Evaluación') }}</label>
+                                        </div>
+                                        <div class="form-group" x-show="view">
+                                            <label for="example-datetime-local-input"
+                                                class="form-control-label">Tiempo de Duración de la Evaluación</label>
+                                            <input class="form-control" type="datetime-local" name="duration"
+                                                value="{{ \Carbon\Carbon::parse(now()->toDateTimeString())->format('d/m/Y H:i:s')}}" id="example-datetime-local-input">
                                         </div>
                                     @endif
                                     @error('post_type_id')
