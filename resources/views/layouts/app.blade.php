@@ -97,6 +97,12 @@
                 {{ $slot }}
                 @include('layouts.footers.guest.with-socials')
             </div>
+        @elseif (!auth()->check() && in_array(request()->route()->getName(),['search'],))
+            <div>
+                @include('layouts.navbars.guest.sign-up')
+                {{ $slot }}
+                @include('layouts.footers.guest.with-socials')
+            </div>
         @endif
     @endguest
 

@@ -29,7 +29,7 @@ class CreatePostsTable extends Migration
             # relationships one to many with posts_type table
             $table->unsignedBigInteger('post_type_id')->nullable();
             $table->foreign('post_type_id')
-            ->references('id')
+                ->references('id')
                 ->on('posts_type')
                 ->onDelete('set null');
 

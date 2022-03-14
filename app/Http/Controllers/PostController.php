@@ -6,11 +6,14 @@ use App\Models\File;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\PostType;
+use App\Models\Evaluation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StorePostRequest;
-use App\Models\Evaluation;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\PostCreatedNotificationMailable;
+use App\Mail\PostUpdateNotificationMailable;
 
 class PostController extends Controller
 {
@@ -95,6 +98,14 @@ class PostController extends Controller
             }
         }
 
+        # Send mail for notificate to the members
+        $members = Auth::user()->currentTeam->allUsers();
+
+        foreach ($members as $member) {
+            $mail = new PostCreatedNotificationMailable();
+            Mail::to($member->email)->send($mail);
+        }
+
         # Retorno a la ruta de create que maneja el metodo homónimo
         return back()->with('status', 'Publicación Creada Correctamente!');
     }
@@ -171,6 +182,14 @@ class PostController extends Controller
             'post_type_id' => $post_type_id,
             'team_id' => $team_id,
         ]);
+
+        # Send mail for notificate to the members
+        $members = Auth::user()->currentTeam->allUsers();
+
+        foreach ($members as $member) {
+            $mail = new PostUpdateNotificationMailable();
+            Mail::to($member->email)->send($mail);
+        }
 
         return back()->with('status', 'Publicación actualizada correctamente!');
     }

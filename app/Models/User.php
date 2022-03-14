@@ -64,19 +64,28 @@ class User extends Authenticatable
     ];
 
     // ########## Relationships ########## //
-    public function rols() {
+    public function rols()
+    {
         return $this->belongsTo(Rol::class);
     }
 
-    public function address() {
+    public function address()
+    {
         return $this->hasOne(Address::class);
     }
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function ratings() {
+    public function ratings()
+    {
         return $this->hasMany(Rating::class);
+    }
+
+    public function instituteData()
+    {
+        return $this->hasOne(InstituteData::class);
     }
 }

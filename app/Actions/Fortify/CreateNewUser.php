@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\InstituteData;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -36,8 +37,9 @@ class CreateNewUser implements CreatesNewUsers
                 'email' => $input['email'],
                 'rol_id' => $input['rol_id'],
                 'password' => Hash::make($input['password']),
-            ]), function (User $user) {
+            ]), function (User $user) use ($input) {
                 $this->createTeam($user);
+                $this->createInstituteData($user, $input['rif']);
             });
         });
     }
@@ -55,5 +57,13 @@ class CreateNewUser implements CreatesNewUsers
             'name' => explode(' ', $user->name, 2)[0]."'s Team",
             'personal_team' => true,
         ]));
+    }
+
+    protected function createInstituteData(User $user, $rif)
+    {
+        InstituteData::create([
+            'rif' => $rif,
+            'user_id' => $user->id,
+        ]);
     }
 }
