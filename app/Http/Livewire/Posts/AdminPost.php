@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Posts;
 
 use App\Models\Post;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,7 @@ class AdminPost extends Component
         $posts = Post::where('title', 'like', '%' . $this->search . '%')
             ->where('team_id', '=', Auth::user()->currentTeam->id)
             ->paginate(10);
-        return view('livewire.posts.admin-post', compact('posts'));
+        $users = User::all();
+        return view('livewire.posts.admin-post', compact('posts', 'users'));
     }
 }

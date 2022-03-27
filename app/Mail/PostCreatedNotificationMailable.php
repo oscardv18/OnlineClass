@@ -17,10 +17,15 @@ class PostCreatedNotificationMailable extends Mailable
      * @return void
      */
     public $subject = 'Nueva Publicación Creada, Inicia Sesión para verificar la actividad.';
+    public $teamName = '';
+    public $postTitle = '';
+    public $postDescription = '';
 
-    public function __construct()
+    public function __construct($team, $title, $description)
     {
-        //
+        $this->teamName = $team;
+        $this->postTitle = $title;
+        $this->postDescription = $description;
     }
 
     /**
@@ -30,7 +35,7 @@ class PostCreatedNotificationMailable extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.created-notification')->with([
+        return $this->markdown('emails.created-notification')->with([
             'subject' => $this->subject,
         ]);
     }

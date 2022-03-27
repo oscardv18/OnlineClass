@@ -40,42 +40,41 @@
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" x-data="{ view: false }">
                                         <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="post_type_id"
+                                            <input @click="view=false" class="form-check-input" type="radio" name="post_type_id"
                                                 id="information" value="1">
                                             <label class="custom-control-label"
                                                 for="information">{{ __('Información') }}</label>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="post_type_id"
-                                                id="evaluation" value="2">
-                                            <label class="custom-control-label"
-                                                for="evaluation">{{ __('Evaluación') }}</label>
-                                        </div>
+                                        @if (Auth::user()->rol_id < 3)
+                                            <div class="form-check">
+                                                <input @click="view=true" class="form-check-input" type="radio"
+                                                    name="post_type_id" id="evaluation" value="2">
+                                                <label class="custom-control-label"
+                                                    for="evaluation">{{ __('Evaluación') }}</label>
+                                            </div>
+                                            <div class="form-group" x-show="view">
+                                                <label for="example-datetime-local-input"
+                                                    class="form-control-label">Tiempo de Duración de la
+                                                    Evaluación</label>
+                                                <input class="form-control" type="datetime-local" name="duration"
+                                                    value="{{ \Carbon\Carbon::parse(now()->toDateTimeString())->format('d/m/Y H:i:s') }}"
+                                                    id="example-datetime-local-input">
+                                            </div>
+                                        @endif
                                         @error('post_type_id')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="content">Contenido</label>
-                                        <textarea name="content"
-                                            class="form-control @error('content') border border-danger rounded-3 @enderror"
-                                            id="content" rows="3">{{ $post->content }}</textarea>
+                                        <textarea name="content" class="form-control @error('content') border border-danger rounded-3 @enderror" id="content"
+                                            rows="3">{{ $post->content }}</textarea>
                                         @error('content')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-
-                                    {{-- <label for="content">{{ __('Seleccione los archivos que desee eliminar') }}</label>
-                                    @foreach ($post_files as $file)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="{{ $file->id }}"
-                                                id="{{ $file->name_file }}" name="{{ $file->id }}">
-                                            <label class="custom-control-label"
-                                                for="{{ $file->name_file }}">{{ $file->name_file }}</label>
-                                        </div>
-                                    @endforeach --}}
                                     <div class="form-group">
                                         <label
                                             class="border-2 border-gray-200 p-3 w-full block rounded cursor-pointer my-2"
@@ -87,7 +86,7 @@
                                                 x-text="files ? files.map(file => file.name).join(', ') : 'Elija los archivos que desee subir junto a la publicación...'"></span>
                                         </label>
                                     </div>
-                                    <input type="submit" value="Crear" class="btn bg-gradient-info">
+                                    <input type="submit" value="Actualizar" class="btn bg-gradient-info">
                                 </form>
                             @endforeach
                         </div>

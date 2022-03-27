@@ -13,7 +13,7 @@
                                         eliminar
                                         tus Publicaciones dentro de la plataforma</p>
                                     <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto"
-                                        href="javascript:;">
+                                        href="{{ route('posts.index') }}">
                                         Ir a los Posts
                                         <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                                     </a>
@@ -41,7 +41,7 @@
                         <span class="mask bg-gradient-dark"></span>
                         <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
                             <h5 class="text-white font-weight-bolder mb-4 pt-2">Empezar a ver clases</h5>
-                            <p class="text-white">Aqui podrás ver los teams en los que eres miembro, dependiendo de
+                            <p class="text-white">Dependiendo de
                                 tu rol dentro del team, podras realizar o no algunas acciones o tareas</p>
                             <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto"
                                 href="{{ route('admin-posts') }}">
@@ -95,24 +95,26 @@
                                                             class="avatar avatar-sm me-3">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $post->title }}</h6>
+                                                        <a href="{{ route('posts.show', ['post' => $post->id]) }}">
+                                                            <h6 class="mb-0 text-sm">{{ $post->title }}</h6>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <div class="avatar-group mt-2">
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Romina Hadid">
-                                                        <img alt="Image placeholder" src="../assets/img/team-2.jpg">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Jessica Doe">
-                                                        <img alt="Image placeholder" src="../assets/img/team-4.jpg">
-                                                    </a>
-                                                </div>
-                                            </td>
+                                            @foreach ($users as $user)
+                                                @if ($user->id === $post->user_id)
+                                                    <td class="text-center">
+                                                        <div class="avatar-group mt-2">
+                                                            <a href="javascript:;"
+                                                                class="avatar avatar-xs rounded-circle"
+                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                title="{{ $user->name }}">
+                                                                <img alt=".." src="{{ $user->profile_photo_url }}">
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                @endif
+                                            @endforeach
                                             <td class="align-middle text-center text-sm">
                                                 <span class="text-xs font-weight-bold">
                                                     @if ($posttype[0]->id == $post->post_type_id)
@@ -126,14 +128,15 @@
                                                 <div class="progress-wrapper w-75 mx-auto">
                                                     <div class="progress-info">
                                                         <div class="progress-percentage">
-                                                            <span class="text-xs font-weight-bold">{{ $post->created_at }}</span>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $post->created_at }}</span>
                                                         </div>
                                                     </div>
-                                                    <div class="progress">
+                                                    {{-- <div class="progress">
                                                         <div class="progress-bar bg-gradient-info w-10"
                                                             role="progressbar" aria-valuenow="10" aria-valuemin="0"
                                                             aria-valuemax="100"></div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </td>
                                         </tr>

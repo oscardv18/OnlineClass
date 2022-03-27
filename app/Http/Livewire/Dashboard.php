@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Post;
 use Livewire\Component;
 use App\Models\PostType;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Component
@@ -17,6 +18,8 @@ class Dashboard extends Component
             ->get();
         $posttype = PostType::all();
 
-        return view('livewire.dashboard', compact('posts', 'posttype'));
+        $users = User::all();
+
+        return view('livewire.dashboard', compact('posts', 'posttype', 'users'));
     }
 }

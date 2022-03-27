@@ -23,7 +23,6 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
                 <ul class="navbar-nav justify-content-end">
-
                     <li class="nav-item px-2 d-flex align-items-center">
                         <!-- Teams Dropdown -->
                         @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())

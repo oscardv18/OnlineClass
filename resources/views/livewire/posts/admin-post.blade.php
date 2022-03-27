@@ -77,15 +77,20 @@
                                             <td class="ps-4">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $post->id }}</p>
                                             </td>
-                                            {{-- <td>
-                                            <div>
-                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $post->user_id }}</p>
-                                            </div>
-                                        </td> --}}
-                                            <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $post->user_id }}</p>
-                                            </td>
+                                            @foreach ($users as $user)
+                                                @if ($user->id === $post->user_id)
+                                                    <td class="text-center">
+                                                        <div class="avatar-group mt-2">
+                                                            <a href="javascript:;"
+                                                                class="avatar avatar-xs rounded-circle"
+                                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                                title="{{ $user->name }}">
+                                                                <img alt=".." src="{{ $user->profile_photo_url }}">
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                @endif
+                                            @endforeach
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $post->title }}</p>
                                             </td>

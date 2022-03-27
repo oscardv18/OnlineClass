@@ -102,7 +102,10 @@ class PostController extends Controller
         $members = Auth::user()->currentTeam->allUsers();
 
         foreach ($members as $member) {
-            $mail = new PostCreatedNotificationMailable();
+            $mail = new PostCreatedNotificationMailable(
+                Auth::user()->currentTeam->name,
+                $post_id->title,
+                $post_id->description);
             Mail::to($member->email)->send($mail);
         }
 
@@ -168,11 +171,8 @@ class PostController extends Controller
         $description = $request->input('description');
         $content = $request->input('content');
         $post_type_id = $request->input('post_type_id');
-
-        # Uso de el Query Buildder de laravel para obtener el id del team actual, pero este debe coincidir con el numero de id del usuario actual del team
-        $team_id = DB::table('teams')->select('id')
-            ->where('id', '=', Auth::user()->id)
-            ->value('id');
+        $eval_duration = date('Y-m-d H:i:s');
+        $eval_duration = $request->input('duration');
 
         $post->update([
             'title' => $title,
@@ -180,7 +180,8 @@ class PostController extends Controller
             'content' => $content,
             'user_id' => Auth::user()->id,
             'post_type_id' => $post_type_id,
-            'team_id' => $team_id,
+            'team_id' => Auth::user()->currentTeam->id,
+            'duration' => $eval_duration,
         ]);
 
         # Send mail for notificate to the members
